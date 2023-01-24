@@ -2,16 +2,19 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { createContext, PropsWithChildren, useContext, useEffect, useState } from "react";
 import * as auth from '../services/userServices'
 
-interface User {
+export interface User {
   name: string;
-  image: string;
+  image?: string;
 }
 
 type ContextTypes = {
   isSigned: boolean
   user: User | null
   isLoading: boolean
-  makeUser(): Promise<void>
+  makeUser({ name, image }: User): Promise<void>
+  clearUser(): Promise<void>
+  show(): Promise<void>
+  updateUserImage(img: string): Promise<void>
 }
 
 
@@ -35,15 +38,19 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
 
       if (storagedUser) {
         setUser(JSON.parse(storagedUser))
-      }
-      setIsLoading(false)
+        setIsLoading(false)
+      } else setIsLoading(false)
     }
 
     loadStorageData()
   })
 
-  async function makeUser() {
-    const response = await auth.createUser()
+  async function makeUser({ name, image }: User) {
+    const newUser = {
+      name,
+      image
+    }
+    const response = await auth.createUser({ user: newUser })
     const { user } = response
 
     setUser(user)
@@ -52,8 +59,25 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
 
   }
 
+  async function clearUser() {
+    await AsyncStorage.clear();
+    setUser(null);
+  }
+
+  async function updateUserImage(img: string) {
+    const userData = {
+      image: img
+    }
+    await AsyncStorage.mergeItem('@PlantLover:user', JSON.stringify(userData))
+  }
+
+  async function show() {
+    const data = await AsyncStorage.getItem('@PlantLover:user')
+    console.log(data)
+  }
+
   return (
-    <AuthContext.Provider value={{ isSigned: !!user, user, makeUser, isLoading }}>
+    <AuthContext.Provider value={{ isSigned: !!user, user, makeUser, clearUser, show, updateUserImage, isLoading }}>
       {children}
     </AuthContext.Provider>
   );

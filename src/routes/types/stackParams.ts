@@ -7,6 +7,7 @@ export type StackNavigationProps = {
   AllReady: {
     name: string
   }
+  MainRoutes: undefined
 }
 
 export type StackProps = NativeStackNavigationProp<StackNavigationProps>

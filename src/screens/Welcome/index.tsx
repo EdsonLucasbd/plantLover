@@ -25,7 +25,7 @@ export function Welcome() {
         width={292.13}
         height={284.3}
       />
-      <Text className='font-[Jost-Regular] text-base text-textBodyDark text-center'>
+      <Text className='font-[Jost-Regular] text-[17px] text-textBodyDark text-center'>
         Não esqueça mais de regar suas plantas. Nós cuidamos de lembrar você
         sempre que precisar.
       </Text>

@@ -1,7 +1,8 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Home } from "../screens/main/Home";
+import { TabNavigationProps } from "./types/tabParams";
 
-const Tab = createBottomTabNavigator()
+const Tab = createBottomTabNavigator<TabNavigationProps>()
 
 export default function MainRoutes() {
   return (

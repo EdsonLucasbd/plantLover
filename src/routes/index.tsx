@@ -7,12 +7,9 @@ import { Loading } from '../components/Loading'
 
 const Routes: React.FC = () => {
   const { isSigned, isLoading } = useAuth()
-  console.log('isSigned: ', isSigned)
 
   if (isLoading) {
-    return (
-      <Loading />
-    )
+    return <Loading />
   }
 
   return isSigned ? <MainRoutes /> : <AuthRoutes />

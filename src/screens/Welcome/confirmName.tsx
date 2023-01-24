@@ -8,21 +8,27 @@ import { CustomButtom } from '../../components/Button'
 export function ConfirmName() {
   const navigation = useNavigation<StackProps>()
   const [name, setName] = useState('')
+  const emoji = {
+    1: require('../../../assets/smile-1.png'),
+    2: require('../../../assets/smile-2.png'),
+  }
+
+  const [smileEmoji, setSmileEmoji] = useState(emoji[1])
 
   function handleConfirm() {
     navigation.navigate('AllReady', { name })
   }
 
-  //função para alterar o valor do name e o emoji
-  function handleTyping() {
-
+  function handleTyping(value: string) {
+    value !== '' ? setSmileEmoji(emoji[2]) : setSmileEmoji(emoji[1])
+    setName(value)
   }
 
 
   return (
     <View className='flex-1 items-center justify-center p-11 gap-y-12'>
       <Image
-        source={require('../../../assets/smile-1.png')}
+        source={smileEmoji}
         className='w-9 h-9'
       />
 
@@ -35,13 +41,16 @@ export function ConfirmName() {
         placeholder='Digite um nome'
         activeUnderlineColor='#AAB2AD'
         underlineColor='#CFCFCF'
+        textColor='#5C6660'
+        placeholderTextColor='#AAB2AD'
+        autoFocus
         style={{
           width: 263,
           backgroundColor: 'transparent',
           textAlign: 'center',
-          color: '#AAB2AD'
+          fontSize: 17
         }}
-        onChangeText={value => setName(value)}
+        onChangeText={value => handleTyping(value)}
       />
 
       <CustomButtom
@@ -49,7 +58,7 @@ export function ConfirmName() {
         onPress={handleConfirm}
         isDisabled={name === ''}
       >
-        <Text className='text-white font-[Jost-Medium]'>Confirmar</Text>
+        <Text className='text-white font-[Jost-Medium] text-[17px]'>Confirmar</Text>
       </CustomButtom>
 
     </View>

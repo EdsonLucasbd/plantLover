@@ -6,6 +6,7 @@ import { Loading } from './src/components/Loading';
 
 export default function App() {
   const [customFonts] = useFonts({
+    'Jost-Light': require('./assets/Jost-Light.ttf'),
     'Jost-Regular': require('./assets/Jost-Regular.ttf'),
     'Jost-Medium': require('./assets/Jost-Medium.ttf'),
     'Jost-SemiBold': require('./assets/Jost-SemiBold.ttf')

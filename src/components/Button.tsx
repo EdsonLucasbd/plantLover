@@ -8,8 +8,10 @@ type ButtomProps = PropsWithChildren<{
 }>
 
 export const CustomButtom = ({ children, classes, isDisabled = false, onPress }: ButtomProps) => {
+  let color = isDisabled ? 'bg-appGreen-300/50' : 'bg-appGreen-300'
+
   return (
-    <TouchableOpacity className={`${classes} bg-appGreen-300 rounded-xl flex items-center 
+    <TouchableOpacity className={`${classes} ${color} rounded-xl flex items-center 
       justify-center`}
       onPress={onPress}
       disabled={isDisabled}
