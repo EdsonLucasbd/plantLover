@@ -1,10 +1,21 @@
-import React, { useState } from 'react';
-import { FlatList, Text, View } from 'react-native';
-import { Button, RadioButton } from 'react-native-paper';
+import { useQuery } from '@apollo/client';
+import React, { useEffect, useState } from 'react';
+import { FlatList, GestureResponderEvent, Text, TouchableOpacity, View } from 'react-native';
+import { GET_ALL_AMBIENCES } from '../graphql/queries';
+import { AmbiencesType } from '../graphql/types';
+import { SecundaryLoader } from './Loading';
 
 export const AmbienceList = () => {
-  const [value, setValue] = useState('');
-  const ambiences = ['Sala', 'Quarto', 'Cozinha', 'Banheiro', 'Varanda']
+  const { data, loading } = useQuery<AmbiencesType>(GET_ALL_AMBIENCES)
+  const [selectedIndex, setSelectedIndex] = useState(0)
+
+  function handleSelectAmbience(index: number) {
+    setSelectedIndex(index)
+  }
+
+  if (loading) {
+    return <SecundaryLoader />
+  }
 
   return (
     <View className='flex-1'>
@@ -17,30 +28,18 @@ export const AmbienceList = () => {
         </Text>
       </View>
       <FlatList
-        data={ambiences}
-        keyExtractor={(item) => item}
+        data={data?.ambiences}
         horizontal
         showsHorizontalScrollIndicator={false}
-        renderItem={(({ item }) => (
-          <Button
-            mode='text'
-            buttonColor='#F5FAF7'
-            textColor='#52665A'
-            compact
-            labelStyle={{
-              color: '#52665A',
-              fontFamily: 'Jost-Regular',
-              fontSize: 13,
-            }}
-            style={{
-              marginHorizontal: 4,
-              borderRadius: 12,
-              width: 76,
-              height: 40
-            }}
+        renderItem={(({ item, index }) => (
+          <TouchableOpacity
+            className={`flex items-center justify-center ${selectedIndex === index ? 'bg-appGreen-100' : 'bg-appBackground'} mx-1 rounded-xl w-[76px] h-10`}
+            onPress={() => handleSelectAmbience(index)}
           >
-            {item}
-          </Button>
+            <Text className={`${selectedIndex === index ? 'text-appGreen-500 font-[Jost-SemiBold]' : 'text-textHeading font-[Jost-Regular]'} text-[13px]`}>
+              {item.ambienceName}
+            </Text>
+          </TouchableOpacity>
         ))}
       />
     </View>

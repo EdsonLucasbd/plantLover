@@ -5,7 +5,6 @@ import { useAuth, User } from '../routes/auth';
 
 import * as ImagePicker from 'expo-image-picker';
 
-
 const Header = ({ name }: User) => {
   const [photo, setPhoto] = useState('');
   const firstLetter = name.slice(0, 1)

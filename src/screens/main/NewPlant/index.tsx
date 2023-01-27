@@ -1,15 +1,20 @@
 import { View, Text, TouchableOpacity } from 'react-native'
 import React from 'react'
 import { useAuth } from '../../../routes/auth'
-import { Loading } from '../../../components/Loading'
+import { SecundaryLoader } from '../../../components/Loading'
 import Header from '../../../components/Header'
 import { AmbienceList } from '../../../components/AmbienceList'
+import Plant from '../../../components/Plant'
+import { useQuery } from '@apollo/client'
+import { PlantsType } from '../../../graphql/types'
+import { GET_ALL_PLANTS } from '../../../graphql/queries'
 
-export function Home() {
+export function NewPlant() {
   const { clearUser, user, show } = useAuth()
+  const { data, loading } = useQuery<PlantsType>(GET_ALL_PLANTS)
 
-  if (!user) {
-    return <Loading />
+  if (!user || loading) {
+    return <SecundaryLoader />
   }
 
   return (
@@ -17,6 +22,14 @@ export function Home() {
       <Header name={user.name} />
 
       <AmbienceList />
+
+      <View className='flex flex-row gap-4 mt-10'>
+        {data && data?.plants.map(({ plant, id }) => {
+          return <Plant plant={plant} key={id} />
+        }
+
+        )}
+      </View>
 
       {/* <Text className='text-lg text-black'>Home</Text>
       <Text>{`Olá!! ${user?.name}`}</Text>

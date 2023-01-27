@@ -3,6 +3,9 @@ import { AuthProvider } from './src/routes/auth';
 import Routes from './src/routes';
 import { useFonts } from 'expo-font';
 import { Loading } from './src/components/Loading';
+import { StatusBar } from 'react-native';
+import { ApolloProvider } from '@apollo/client';
+import { client } from './src/graphql/client';
 
 export default function App() {
   const [customFonts] = useFonts({
@@ -17,7 +20,10 @@ export default function App() {
   return (
     <NavigationContainer>
       <AuthProvider>
-        <Routes />
+        <ApolloProvider client={client}>
+          <StatusBar translucent backgroundColor='transparent' />
+          <Routes />
+        </ApolloProvider>
       </AuthProvider>
     </NavigationContainer>
   );
