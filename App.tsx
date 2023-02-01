@@ -9,10 +9,10 @@ import { client } from './src/graphql/client';
 
 export default function App() {
   const [customFonts] = useFonts({
-    'Jost-Light': require('./assets/Jost-Light.ttf'),
-    'Jost-Regular': require('./assets/Jost-Regular.ttf'),
-    'Jost-Medium': require('./assets/Jost-Medium.ttf'),
-    'Jost-SemiBold': require('./assets/Jost-SemiBold.ttf')
+    'Jost-Light': require('./assets/fonts/Jost-Light.ttf'),
+    'Jost-Regular': require('./assets/fonts/Jost-Regular.ttf'),
+    'Jost-Medium': require('./assets/fonts/Jost-Medium.ttf'),
+    'Jost-SemiBold': require('./assets/fonts/Jost-SemiBold.ttf')
   })
 
   if (!customFonts) return <Loading />
