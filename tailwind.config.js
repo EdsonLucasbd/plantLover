@@ -16,7 +16,9 @@ module.exports = {
         'appBackground': '#DCDCE6',
         'textHeading': '#52665A',
         'textBodyDark': '#5C6660',
-        'textBodyLight': '#AAB2AD'
+        'textBodyLight': '#AAB2AD',
+        'textBlue': '#3D7199',
+        'infoCard': '#EBF6FF'
       }
     },
   },
