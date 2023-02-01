@@ -1,13 +1,37 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { ListDashes, PlusCircle } from "phosphor-react-native";
 import { TouchableRipple } from "react-native-paper";
+import { ConfigPlant } from "../screens/main/ConfigPlant";
 import MyPlants from "../screens/main/MyPlants";
 import { NewPlant } from "../screens/main/NewPlant";
+import { StackNavigationProps } from "./types/stackParams";
 import { TabNavigationProps } from "./types/tabParams";
 
 const Tab = createBottomTabNavigator<TabNavigationProps>()
+const Stack = createNativeStackNavigator<StackNavigationProps>()
 
 export default function MainRoutes() {
+  return (
+    <Stack.Navigator
+      initialRouteName="Home"
+      screenOptions={{
+        headerShown: false,
+      }}
+    >
+      <Stack.Screen
+        name="Home"
+        component={HomeRoutes}
+      />
+      <Stack.Screen
+        name="ConfigPlant"
+        component={ConfigPlant}
+      />
+    </Stack.Navigator>
+  )
+}
+
+function HomeRoutes() {
   return (
     <Tab.Navigator
       initialRouteName="NewPlant"

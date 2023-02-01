@@ -8,7 +8,7 @@ import * as ImagePicker from 'expo-image-picker';
 const Header = ({ name }: User) => {
   const [photo, setPhoto] = useState('');
   const firstLetter = name.slice(0, 1)
-  const { user, makeUser, updateUserImage } = useAuth()
+  const { user, updateUserImage } = useAuth()
 
   useEffect(() => {
     user?.image !== undefined && setPhoto(user.image)
@@ -21,8 +21,6 @@ const Header = ({ name }: User) => {
       aspect: [4, 3],
       quality: 1,
     });
-
-    console.log(result);
 
     if (!result.canceled) {
       setPhoto(result.assets[0].uri);

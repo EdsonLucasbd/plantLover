@@ -1,24 +1,19 @@
 import { useQuery } from '@apollo/client';
-import React, { useEffect, useState } from 'react';
-import { FlatList, GestureResponderEvent, Text, TouchableOpacity, View } from 'react-native';
+import React, { useState } from 'react';
+import { FlatList, Text, TouchableOpacity, View } from 'react-native';
 import { GET_ALL_AMBIENCES } from '../graphql/queries';
 import { AmbiencesType } from '../graphql/types';
-import { SecundaryLoader } from './Loading';
 
 export const AmbienceList = () => {
-  const { data, loading } = useQuery<AmbiencesType>(GET_ALL_AMBIENCES)
+  const { data } = useQuery<AmbiencesType>(GET_ALL_AMBIENCES)
   const [selectedIndex, setSelectedIndex] = useState(0)
 
   function handleSelectAmbience(index: number) {
     setSelectedIndex(index)
   }
 
-  if (loading) {
-    return <SecundaryLoader />
-  }
-
   return (
-    <View className='flex-1'>
+    <View className='flex-auto max-h-36'>
       <View className='flex flex-col items-start mb-6'>
         <Text className='font-[Jost-Medium] text-[17px] text-textBodyDark'>
           Em qual ambiente

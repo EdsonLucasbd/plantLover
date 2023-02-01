@@ -5,6 +5,9 @@ export type TabNavigationProps = {
     name: string
   }
   MyPlants: undefined
+  MainStack: {
+    name: string
+  }
 }
 
 export type TabProps = BottomTabNavigationProp<TabNavigationProps>

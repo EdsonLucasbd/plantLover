@@ -1,17 +1,41 @@
+import { OperationVariables } from '@apollo/client';
+import { useNavigation } from '@react-navigation/native';
 import React from 'react';
-import { Image, Text, View } from 'react-native';
-import { PlantType } from '../graphql/types';
+import { ImageBackground, Text, TouchableOpacity, View } from 'react-native';
+import { StackProps } from '../routes/types/stackParams';
 
-const Plant = ({ plant }: PlantType) => {
-  return (
-    <View
-      className='flex flex-col bg-appBackground rounded-[20px]
-      w-[148px] h-[154px]'
-    >
-      <Image source={{ uri: `${plant.plantImage.url}` }} />
-      <Text>{plant.plantName}</Text>
-    </View>
-  )
+interface Props {
+  name: string,
+  image: string,
+  id: OperationVariables | undefined
 }
 
-export default Plant;
+export const Plant = ({ name, image, id }: Props) => {
+  const navigation = useNavigation<StackProps>()
+
+  return (
+    <TouchableOpacity
+      className='flex flex-col justify-center items-center bg-appBackground/30 rounded-[20px]
+      w-[148px] h-[154px] mb-4 mr-4 relative'
+      onPress={() => navigation.navigate('ConfigPlant', {
+        id
+      })}
+    >
+      <ImageBackground
+        source={{ uri: image }}
+        style={{
+          position: 'absolute',
+          flex: 1,
+          width: 80,
+          height: 80,
+          top: 25
+        }}
+        resizeMode='contain'
+      />
+      <Text
+        className='font-[Jost-SemiBold] text-[13px] text-textHeading absolute bottom-4'>
+        {name}
+      </Text>
+    </TouchableOpacity>
+  )
+}

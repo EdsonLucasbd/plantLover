@@ -1,5 +1,6 @@
 import { PropsWithChildren } from 'react';
 import { TouchableOpacity } from 'react-native';
+import { TouchableRipple } from 'react-native-paper';
 
 type ButtomProps = PropsWithChildren<{
   classes: string
@@ -11,12 +12,12 @@ export const CustomButtom = ({ children, classes, isDisabled = false, onPress }:
   let color = isDisabled ? 'bg-appGreen-300/50' : 'bg-appGreen-300'
 
   return (
-    <TouchableOpacity className={`${classes} ${color} rounded-xl flex items-center 
+    <TouchableRipple className={`${classes} ${color} rounded-xl flex items-center 
       justify-center`}
       onPress={onPress}
       disabled={isDisabled}
     >
       {children}
-    </TouchableOpacity>
+    </TouchableRipple>
   );
 }
