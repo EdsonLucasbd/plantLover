@@ -13,14 +13,26 @@ export const GET_ALL_PLANTS = gql`
   query getAllPlants {
     plants {
       id
-      plant {
-        plantName
-        plantImage {
-          url
-        }
-        plantRules
-        plantWatering
+      plantName
+      plantImage {
+        url
       }
+      plantRules
+      plantWatering
+    }
+  }
+`
+
+export const GET_PLANT = gql`
+  query getPlant($id: ID!) {
+    plant(where: {id: $id}) {
+      id
+      plantName
+      plantImage {
+        url
+      }
+      plantRules
+      plantWatering
     }
   }
 `

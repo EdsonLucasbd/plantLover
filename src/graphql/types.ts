@@ -7,18 +7,20 @@ export type AmbiencesType = {
   ambiences: AmbienceType[]
 }
 
-export type PlantType = {
+export type GenericPlantType = {
   id?: number
-  plant: {
-    plantName: string
-    plantImage: {
-      url: string
-    }
-    plantRules: string
-    plantWatering: string
+  plantName: string
+  plantImage: {
+    url: string
   }
+  plantRules?: string
+  plantWatering?: string
+}
+
+export type PlantType = {
+  plant: GenericPlantType
 }
 
 export type PlantsType = {
-  plants: PlantType[]
+  plants: GenericPlantType[]
 }
