@@ -5,7 +5,7 @@ import { Image, Text, View } from 'react-native';
 import { IconButton } from 'react-native-paper';
 import { CustomButtom } from '../../../components/Button';
 import { InfoCard } from '../../../components/InfoCard';
-import TimerPicker from '../../../components/TimerPicker';
+import { TimerPicker } from '../../../components/Timer/TimerPicker';
 import { GET_PLANT } from '../../../graphql/queries';
 import { PlantType } from '../../../graphql/types';
 import { StackNavigationProps } from '../../../routes/types/stackParams';
@@ -52,10 +52,13 @@ export function ConfigPlant() {
         </View>
       </View>
       <InfoCard plantWatering={data?.plant.plantWatering} customClass='top-1/2' />
-      <View className='flex h-1/2 pt-[83px]'>
-        <Text>Ecolha o melhor horário para te lembrarmos:</Text>
+      <View className='flex h-1/2 w-[259px] pt-[83px]'>
+        <View className='h-[121px] items-center'>
+          <Text className='font-[Jost-Regular] text-[13px] leading-[23px]'>Ecolha o melhor horário para te lembrarmos:</Text>
 
-        <TimerPicker />
+          <TimerPicker />
+        </View>
+
       </View>
       <CustomButtom
         classes='w-[311px] h-[56px] absolute bottom-[70px]'
