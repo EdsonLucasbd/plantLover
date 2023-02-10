@@ -6,6 +6,7 @@ import { Loading } from './src/components/Loading';
 import { StatusBar } from 'react-native';
 import { ApolloProvider } from '@apollo/client';
 import { client } from './src/graphql/client';
+import { PlantProvider } from './src/services/PlantProvider';
 
 export default function App() {
   const [customFonts] = useFonts({
@@ -21,8 +22,10 @@ export default function App() {
     <NavigationContainer>
       <AuthProvider>
         <ApolloProvider client={client}>
-          <StatusBar translucent backgroundColor='transparent' />
-          <Routes />
+          <PlantProvider>
+            <StatusBar translucent backgroundColor='transparent' />
+            <Routes />
+          </PlantProvider>
         </ApolloProvider>
       </AuthProvider>
     </NavigationContainer>

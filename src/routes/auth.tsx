@@ -7,6 +7,7 @@ export interface User {
   image?: string;
 }
 
+
 type ContextTypes = {
   isSigned: boolean
   user: User | null
@@ -60,7 +61,7 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
   }
 
   async function clearUser() {
-    await AsyncStorage.clear();
+    await AsyncStorage.removeItem('@PlantLover:user');
     setUser(null);
   }
 
@@ -77,7 +78,11 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
   }
 
   return (
-    <AuthContext.Provider value={{ isSigned: !!user, user, makeUser, clearUser, show, updateUserImage, isLoading }}>
+    <AuthContext.Provider
+      value={{
+        isSigned: !!user, user, makeUser, clearUser, show, updateUserImage, isLoading
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );

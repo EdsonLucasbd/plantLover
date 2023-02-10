@@ -13,6 +13,7 @@ export type StackNavigationProps = {
     id: OperationVariables | undefined
   }
   Home: undefined
+  RegisteredPlant: undefined
 }
 
 export type StackProps = NativeStackNavigationProp<StackNavigationProps>

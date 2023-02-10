@@ -1,7 +1,7 @@
 import { View, Text, TouchableOpacity, ScrollView } from 'react-native'
 import React from 'react'
 import { useAuth } from '../../../routes/auth'
-import { SecundaryLoader } from '../../../components/Loading'
+import { SecondaryLoader } from '../../../components/Loading'
 import Header from '../../../components/Header'
 import { AmbienceList } from '../../../components/AmbienceList'
 import { Plant } from '../../../components/Plant'
@@ -16,7 +16,7 @@ export function NewPlant() {
   if (!user || loading) {
     return (
       <View className='flex flex-1 items-center justify-center'>
-        <SecundaryLoader />
+        <SecondaryLoader />
       </View>
     )
   }
@@ -40,6 +40,7 @@ export function NewPlant() {
             name={plant.plantName}
             image={plant.plantImage.url}
             id={plant.id as OperationVariables | undefined}
+            isLoading={loading}
             key={plant.id}
           />
         ))}

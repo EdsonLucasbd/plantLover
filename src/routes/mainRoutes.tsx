@@ -5,6 +5,7 @@ import { TouchableRipple } from "react-native-paper";
 import { ConfigPlant } from "../screens/main/ConfigPlant";
 import MyPlants from "../screens/main/MyPlants";
 import { NewPlant } from "../screens/main/NewPlant";
+import RegisteredPlant from "../screens/main/RegisteredPlant";
 import { StackNavigationProps } from "./types/stackParams";
 import { TabNavigationProps } from "./types/tabParams";
 
@@ -26,6 +27,10 @@ export default function MainRoutes() {
       <Stack.Screen
         name="ConfigPlant"
         component={ConfigPlant}
+      />
+      <Stack.Screen
+        name="RegisteredPlant"
+        component={RegisteredPlant}
       />
     </Stack.Navigator>
   )
